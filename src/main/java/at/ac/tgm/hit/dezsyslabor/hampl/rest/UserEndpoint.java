@@ -12,6 +12,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * The user endpoint for testing purpose
+ *
+ * @author Burkhard Hampl [bhampl@student.tgm.ac.at]
+ * @version 1.0
+ */
 @Named
 @Path("/user")
 @Produces({MediaType.APPLICATION_JSON})
@@ -20,6 +26,12 @@ public class UserEndpoint {
     @Inject
     UserRepository userRepository;
 
+    /**
+     * Finds the user with the given email
+     *
+     * @param email the email
+     * @return a new HTTP response
+     */
     @GET
     @Path("/{email}")
     public Response get(@PathParam("email") String email) {

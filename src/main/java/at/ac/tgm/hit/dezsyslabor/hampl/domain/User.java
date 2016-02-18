@@ -7,6 +7,12 @@ import javax.persistence.Id;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
+/**
+ * The entity class for the user
+ *
+ * @author Burkhard Hampl [bhampl@student.tgm.ac.at]
+ * @version 1.0
+ */
 @Entity
 public class User implements Serializable {
 
@@ -25,6 +31,13 @@ public class User implements Serializable {
 
     }
 
+    /**
+     * Creates a now user with the given parameters
+     *
+     * @param email    the email
+     * @param name     the name
+     * @param password the password
+     */
     public User(String email, String name, String password) {
         this.email = email;
         this.name = name;

@@ -12,6 +12,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * The login endpoint
+ *
+ * @author Burkhard Hampl [bhampl@student.tgm.ac.at]
+ * @version 1.0
+ */
 @Named
 @Path("/login")
 @Produces({MediaType.APPLICATION_JSON})
@@ -20,6 +26,12 @@ public class LoginEndpoint {
     @Inject
     UserRepository userRepository;
 
+    /**
+     * Logs a user in
+     *
+     * @param user the user
+     * @return a new HTTP response
+     */
     @POST
     public Response post(User user) {
         if (user != null && user.getEmail() != null) {

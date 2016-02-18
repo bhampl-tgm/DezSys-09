@@ -34,22 +34,37 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-jersey'
     compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile group:  'javax.interceptor', name: 'javax.interceptor-api', version: '1.+'
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.11'
+task generateJavadoc(type: Javadoc) {
+    source = sourceSets.main.allJava
+    destinationDir = file("doc/javadoc")
+    classpath = configurations.compile
+    title = "DezSysLabor-09 \"Web Services in Java\""
 }
 
 jar {
+    dependsOn generateJavadoc
     baseName = 'Hampl_Dezsys09'
     version = '1.0'
     from sourceSets.main.allSource
+    from(javadoc.destinationDir) {
+        into('doc/javadoc')
+    }
     from(projectDir) {
         include 'doc/**'
         exclude 'doc/*.docx'
         exclude 'doc/*.odt'
         exclude 'doc/*.tex'
     }
+    from('.git') {
+        into('.git')
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.11'
 }
 
 compileJava.mustRunAfter clean
