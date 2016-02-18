@@ -1,0 +1,55 @@
+group 'at.ac.tgm.hit.dezsyslabor.hampl'
+version '1.0'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath('org.springframework.boot:spring-boot-gradle-plugin:1.2.0.RELEASE')
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+springBoot {
+    mainClass = 'at.ac.tgm.hit.dezsyslabor.hampl.Application'
+}
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-hornetq'
+    compile group: 'com.h2database', name: 'h2'
+    compile group: 'org.hsqldb', name: 'hsqldb'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-jersey'
+    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.11'
+}
+
+jar {
+    baseName = 'Hampl_Dezsys09'
+    version = '1.0'
+    from sourceSets.main.allSource
+    from(projectDir) {
+        include 'doc/**'
+        exclude 'doc/*.docx'
+        exclude 'doc/*.odt'
+        exclude 'doc/*.tex'
+    }
+}
+
+compileJava.mustRunAfter clean
